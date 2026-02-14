@@ -1,0 +1,134 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  CLIENT
+  FREELANCER
+  ADMIN
+}
+
+enum MilestoneStatus {
+  DRAFT
+  AWAITING_FUNDING
+  FUNDING_IN_PROGRESS
+  FUNDED
+  IN_PROGRESS
+  SUBMITTED
+  APPROVED
+  RELEASING
+  RELEASED
+  DISPUTED
+  REFUNDED
+}
+
+enum TxStatus {
+  INITIATED
+  PENDING
+  SUCCESS
+  FAILED
+  CANCELLED
+}
+
+enum LedgerType {
+  ESCROW_HELD
+  FEE_EARNED
+  FREELANCER_PAYABLE
+  FREELANCER_PAID
+  REFUND
+}
+
+model User {
+  id           String   @id @default(cuid())
+  role         UserRole @default(CLIENT)
+  fullName     String
+  email        String?  @unique
+  phoneNumber  String?  @unique
+  passwordHash String?
+  createdAt    DateTime @default(now())
+
+  clientProjects     Project[] @relation("ClientProjects")
+  freelancerProjects Project[] @relation("FreelancerProjects")
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  createdAt   DateTime @default(now())
+
+  clientId    String
+  client      User     @relation("ClientProjects", fields: [clientId], references: [id])
+
+  freelancerId String?
+  freelancer   User?    @relation("FreelancerProjects", fields: [freelancerId], references: [id])
+
+  milestones  Milestone[]
+}
+
+model Milestone {
+  id        String          @id @default(cuid())
+  projectId String
+  project   Project         @relation(fields: [projectId], references: [id])
+
+  title     String
+  amountInt Int             // store amount in KES as integer (e.g., 100000)
+  status    MilestoneStatus @default(AWAITING_FUNDING)
+
+  submissionNotes String?
+  submissionUrl   String?
+
+  createdAt DateTime @default(now())
+
+  payments  Payment[]
+  payouts   Payout[]
+  ledger    LedgerEntry[]
+}
+
+model Payment {
+  id                String   @id @default(cuid())
+  milestoneId       String
+  milestone         Milestone @relation(fields: [milestoneId], references: [id])
+
+  amountInt         Int
+  phoneNumber       String
+  status            TxStatus  @default(INITIATED)
+
+  merchantRequestId String?
+  checkoutRequestId String?  @unique
+  rawCallbackJson   Json?
+
+  createdAt         DateTime @default(now())
+}
+
+model Payout {
+  id                       String   @id @default(cuid())
+  milestoneId              String
+  milestone                Milestone @relation(fields: [milestoneId], references: [id])
+
+  amountInt                Int
+  phoneNumber              String
+  status                   TxStatus  @default(PENDING)
+
+  originatorConversationId String?
+  rawResultJson            Json?
+
+  createdAt                DateTime @default(now())
+}
+
+model LedgerEntry {
+  id          String     @id @default(cuid())
+  milestoneId String
+  milestone   Milestone  @relation(fields: [milestoneId], references: [id])
+
+  type        LedgerType
+  amountInt   Int
+  createdAt   DateTime   @default(now())
+
+  @@index([milestoneId])
+}
