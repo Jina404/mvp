@@ -78,7 +78,7 @@ export default function HomePage() {
           <nav className="hidden items-center gap-6 text-sm text-slate-600 dark:text-slate-400 md:flex">
             <a href="#how" className="transition hover:text-slate-900 dark:hover:text-slate-200">How it works</a>
             <a href="#product" className="transition hover:text-slate-900 dark:hover:text-slate-200">Product</a>
-            <a href="#impact" className="transition hover:text-slate-900 dark:hover:text-slate-200">Impact</a>
+            <a href="#services" className="transition hover:text-slate-900 dark:hover:text-slate-200">Services</a>
             <a href="#samples" className="transition hover:text-slate-900 dark:hover:text-slate-200">Samples</a>
           </nav>
           <div className="hidden items-center gap-6 text-sm text-slate-600 dark:text-slate-400 md:flex">
@@ -104,7 +104,7 @@ export default function HomePage() {
             <nav className="flex flex-col gap-3 text-sm font-medium text-slate-700">
               <a href="#how" onClick={() => setMobileMenuOpen(false)} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">How it works</a>
               <a href="#product" onClick={() => setMobileMenuOpen(false)} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">Product</a>
-              <a href="#impact" onClick={() => setMobileMenuOpen(false)} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">Impact</a>
+              <a href="#services" onClick={() => setMobileMenuOpen(false)} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">Services</a>
               <a href="#samples" onClick={() => setMobileMenuOpen(false)} className="rounded-lg px-3 py-2 transition hover:bg-slate-100">Samples</a>
             </nav>
             <div className="mt-4 flex items-center gap-3 border-t border-slate-100 pt-4">
@@ -321,7 +321,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="landing-fade mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 2xl:max-w-[1400px] 2xl:px-12">
+      <section id="services" className="landing-fade mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 2xl:max-w-[1400px] 2xl:px-12">
         <div className="text-sm font-semibold uppercase tracking-[0.2em] text-purple-600">SERVICES</div>
         <div className="mt-3 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div>
