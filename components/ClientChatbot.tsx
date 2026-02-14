@@ -131,9 +131,12 @@ const estimateDeadline = () => {
   return date.toISOString().split("T")[0];
 };
 
-function ClientChatbot() {
-  // Accept introText prop
-  const introText = typeof window !== "undefined" && (window as any).introText || "Hi! I am your SkillLink Nexus assistant. I will ask a few simple questions to turn your idea into a clear project plan.";
+interface ClientChatbotProps {
+  introText?: string;
+}
+
+function ClientChatbot({ introText: introTextProp }: ClientChatbotProps) {
+  const introText = introTextProp || "Hi! I am your SkillLink Nexus assistant. I will ask a few simple questions to turn your idea into a clear project plan.";
   const [messages, setMessages] = useState<ChatMessage[]>([
     createMessage("ai", introText),
     createMessage("ai", QUESTIONS[0].label)
@@ -461,13 +464,4 @@ function ClientChatbot() {
   );
 }
 
-// Accept introText prop
-interface ClientChatbotProps {
-  introText?: string;
-}
-
-function ClientChatbotWithProps(props: ClientChatbotProps) {
-  return <ClientChatbot {...props} />;
-}
-
-export default memo(ClientChatbotWithProps);
+export default memo(ClientChatbot);
