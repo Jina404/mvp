@@ -50,7 +50,7 @@ const MILESTONES: Milestone[] = [
     cost: 20000,
     dueDate: "2026-03-05",
     workStatus: "Submitted",
-    escrowStatus: "Ready to release",
+    escrowStatus: "Releasing",
     canRelease: true,
     deliverables: [
       "Wireframes (mobile + desktop)",
@@ -66,7 +66,7 @@ const MILESTONES: Milestone[] = [
     cost: 20000,
     dueDate: "2026-03-25",
     workStatus: "In Progress",
-    escrowStatus: "Held",
+    escrowStatus: "Funded",
     canRelease: false,
     deliverables: [
       "Frontend implementation (Next.js)",
@@ -81,8 +81,8 @@ const MILESTONES: Milestone[] = [
     name: "Redesign Launch",
     cost: 20000,
     dueDate: "2026-04-10",
-    workStatus: "Pending",
-    escrowStatus: "Held",
+    workStatus: "Not Started",
+    escrowStatus: "Funded",
     canRelease: false,
     deliverables: [
       "Production deployment",
@@ -112,7 +112,7 @@ function formatDate(iso: string) {
 
 function WorkStatusChip({ status }: { status: WorkStatus }) {
   const styles: Record<WorkStatus, string> = {
-    Pending:
+    "Not Started":
       "bg-slate-100 text-slate-500 dark:bg-slate-700/50 dark:text-slate-400",
     "In Progress":
       "bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400",
@@ -132,18 +132,22 @@ function WorkStatusChip({ status }: { status: WorkStatus }) {
 
 function EscrowChip({ status }: { status: EscrowStatus }) {
   const styles: Record<EscrowStatus, string> = {
-    Held: "bg-amber-50 text-amber-600 border border-amber-200 dark:bg-amber-500/10 dark:text-amber-400 dark:border-amber-500/20",
-    "Ready to release":
+    Unfunded: "bg-slate-100 text-slate-500 dark:bg-slate-700/50 dark:text-slate-400",
+    Funding: "bg-yellow-50 text-yellow-600 border border-yellow-200 dark:bg-yellow-500/10 dark:text-yellow-400 dark:border-yellow-500/20",
+    Funded: "bg-amber-50 text-amber-600 border border-amber-200 dark:bg-amber-500/10 dark:text-amber-400 dark:border-amber-500/20",
+    Releasing:
       "bg-purple-50 text-purple-700 border border-purple-200 dark:bg-purple-500/15 dark:text-purple-300 dark:border-purple-500/25",
     Released:
       "bg-slate-50 text-slate-500 dark:bg-slate-700/40 dark:text-slate-400",
+    Refunded: "bg-red-50 text-red-600 border border-red-200 dark:bg-red-500/10 dark:text-red-400 dark:border-red-500/20",
+    Disputed: "bg-orange-50 text-orange-600 border border-orange-200 dark:bg-orange-500/10 dark:text-orange-400 dark:border-orange-500/20",
   };
   return (
     <span
       className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold tracking-wide uppercase ${styles[status]}`}
     >
-      {status === "Held" && <Clock className="h-3 w-3" />}
-      {status === "Ready to release" && <ShieldCheck className="h-3 w-3" />}
+      {status === "Funded" && <Clock className="h-3 w-3" />}
+      {status === "Releasing" && <ShieldCheck className="h-3 w-3" />}
       {status}
     </span>
   );
@@ -395,7 +399,7 @@ export default function MilestonePayments() {
     .filter((m) => m.escrowStatus === "Released")
     .reduce((s, m) => s + m.cost, 0);
   const heldTotal = milestones
-    .filter((m) => m.escrowStatus === "Held")
+    .filter((m) => m.escrowStatus === "Funded")
     .reduce((s, m) => s + m.cost, 0);
 
   return (
