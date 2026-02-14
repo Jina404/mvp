@@ -8,6 +8,17 @@ export type ProjectStatus =
   | "Active"
   | "In Review";
 export type MilestoneStatus = "Pending" | "In Progress" | "Submitted" | "Approved" | "Changes Requested";
+export type WorkStatus = "Not Started" | "In Progress" | "Submitted" | "Approved";
+
+export type EscrowStatus =
+  | "Unfunded"
+  | "Funding"
+  | "Funded"
+  | "Releasing"
+  | "Released"
+  | "Refunded"
+  | "Disputed";
+
 export type RiskLevel = "Green" | "Yellow" | "Red";
 
 export type Milestone = {
