@@ -11,9 +11,9 @@ import {
   Clock,
   ShieldCheck,
 } from "lucide-react";
+import type { WorkStatus, EscrowStatus } from "@/lib/types";
 
-// ─── Types ─────────────────────────────────────────────────── WorkStatus = "Pending" | "In Progress" | "Submitted" | "Approved";
-type EscrowStatus = "Held" | "Ready to release" | "Released";
+// ─── Types ───────────────────────────────────────────────────
 
 interface Milestone {
   name: string;
