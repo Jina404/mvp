@@ -426,7 +426,7 @@ export default function RequestAccessPage() {
             </p>
           )}
 
-          {/* Trust line + sign in */}
+          {/* Trust line + log in */}
           <div className="mt-3 flex flex-col items-center gap-1.5 text-center">
             <div className="flex items-center gap-1.5">
               <Lock className="h-3 w-3 text-slate-300" />
@@ -437,7 +437,7 @@ export default function RequestAccessPage() {
             <p className="text-[12px] text-slate-500 dark:text-slate-400">
               Already have access?
               <Link className="ml-1 font-semibold text-purple-600 hover:text-purple-700" href="/login">
-                Sign in
+                Log in
               </Link>
             </p>
           </div>

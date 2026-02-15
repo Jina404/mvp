@@ -4,10 +4,11 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FiCheckCircle, FiClipboard, FiUsers } from "react-icons/fi";
-import { ArrowRight, Bot, BarChart3, Globe, Megaphone, Menu, Palette, Smartphone, Sparkles, Wrench, X } from "lucide-react";
+import { ArrowRight, Bot, BarChart3, Globe, Megaphone, Menu, MessageSquare, Palette, Smartphone, Sparkles, Wrench, X } from "lucide-react";
 import ForceLightMode from "@/components/ForceLightMode";
 import FloatingChatbot from "@/components/FloatingChatbot";
 import Footer from "@/components/Footer";
+import NetworkCanvas from "@/components/NetworkCanvas";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function HomePage() {
@@ -88,7 +89,7 @@ export default function HomePage() {
           </nav>
           <div className="hidden items-center gap-6 text-sm text-slate-600 dark:text-slate-400 md:flex">
             <Link className="transition hover:text-slate-900 dark:hover:text-slate-200" href="/login">
-              Sign in
+              Log in
             </Link>
             <Link className="inline-flex items-center rounded-full bg-purple-700 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-purple-800" href="/request">
               Get started
@@ -114,7 +115,7 @@ export default function HomePage() {
             </nav>
             <div className="mt-4 flex items-center gap-3 border-t border-slate-100 pt-4">
               <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="flex-1 rounded-lg border border-slate-200 py-2.5 text-center text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
-                Sign in
+                Log in
               </Link>
               <Link href="/request" onClick={() => setMobileMenuOpen(false)} className="flex-1 rounded-lg bg-purple-700 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-purple-800">
                 Get started
@@ -278,69 +279,124 @@ export default function HomePage() {
       </section>
 
       {/* Product */}
-      <section id="product" className="landing-fade landing-band landing-band--tinted mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 2xl:max-w-[1400px] 2xl:px-12">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <div className="text-sm font-semibold uppercase tracking-wide text-purple-600">Product preview</div>
-            <h2 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-slate-100 sm:text-3xl">A workspace built for delivery teams.</h2>
-          </div>
-          <Link className="btn btn-secondary" href="/request">
-            Book a walkthrough
-          </Link>
+      <section id="product" className="landing-fade relative overflow-hidden py-12 sm:py-16" style={{ background: "linear-gradient(135deg, #1a0a3e 0%, #220e50 30%, #2a1260 60%, #311570 100%)" }}>
+        {/* 3D animated particle network */}
+        <NetworkCanvas />
+
+        {/* Header */}
+        <div className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">Your project workspace</h2>
+          <p className="mt-3 max-w-3xl mx-auto text-base text-purple-100/90 sm:text-lg">
+            Track milestones, escrow, files, and approvals in one place while SkillLink Nexus coordinates vetted specialists behind the scenes.
+          </p>
         </div>
-        <div className="landing-stagger mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+        {/* Cards */}
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-8 2xl:max-w-[1400px] 2xl:px-12">
+          <div className="landing-stagger grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {[
             {
               title: "Client HQ",
               body: "Track milestones, files, feedback, and approvals in one place.",
               image: "/client_hq.png",
               alt: "Client HQ dashboard showing milestones and project tracking",
+              iconBg: "bg-purple-600",
+              iconSvg: (
+                <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
+              ),
             },
             {
               title: "Assigned Specialist",
               body: "Chat with your vetted specialist and follow progress updates privately.",
               image: "/assigned_specialist.png",
               alt: "Assigned Specialist chat interface with progress updates",
+              iconBg: "bg-purple-600",
+              iconSvg: (
+                <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+              ),
             },
             {
               title: "Invoices",
               body: "View invoices, download PDFs, and track payments across projects.",
               image: "/invoices.png",
               alt: "Invoices dashboard with payment tracking",
+              iconBg: "bg-teal-500",
+              iconSvg: (
+                <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+              ),
             },
           ].map((item) => (
-            <div key={item.title} className="group rounded-2xl border border-slate-200 bg-white dark:border-white/5 dark:bg-[#1E2329] overflow-hidden shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
-              <div className="relative aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
-                <Image
-                  src={item.image}
-                  alt={item.alt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                  priority={false}
-                />
+            <div key={item.title} className="group rounded-xl border border-slate-100 bg-white dark:border-white/5 dark:bg-[#1E2329] overflow-hidden shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
+              {/* Image area with tinted gradient that fades to white */}
+              <div className="relative flex items-center justify-center px-4 pt-4 pb-3">
+                {/* Tinted gradient background — purple/lavender top fading to transparent */}
+                <div className="absolute inset-0 bg-gradient-to-b from-purple-100/70 via-purple-50/40 to-transparent dark:from-purple-900/20 dark:via-purple-900/10 dark:to-transparent" />
+                <div className="relative z-10 w-full">
+                  <div className="relative aspect-[16/10] w-full">
+                    <Image
+                      src={item.image}
+                      alt={item.alt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-contain drop-shadow-lg"
+                      priority={false}
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{item.title}</h3>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{item.body}</p>
+              {/* Title + description */}
+              <div className="px-4 py-4">
+                <div className="flex items-center gap-2">
+                  <div className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full ${item.iconBg} shadow-md`}>
+                    {item.iconSvg}
+                  </div>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">{item.title}</h3>
+                </div>
+                <p className="mt-2 text-xs leading-relaxed text-slate-500 dark:text-slate-400">{item.body}</p>
               </div>
             </div>
           ))}
+          </div>
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="relative z-10 mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8 mt-10">
+          <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-7 shadow-2xl shadow-purple-900/20">
+            <div className="text-center max-w-2xl mx-auto">
+              <h3 className="text-xl font-bold text-white sm:text-2xl">Ready to start your next project?</h3>
+              <p className="mt-2.5 text-sm text-purple-100/80 sm:text-base">
+                Get matched to a vetted specialist and manage delivery through milestones and escrow.
+              </p>
+              <div className="mt-5 flex flex-col sm:flex-row gap-3 justify-center">
+                <Link 
+                  href="/request" 
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition-all hover:bg-violet-500 hover:shadow-xl hover:shadow-violet-500/40 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-purple-900"
+                >
+                  Request a service
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link 
+                  href="/contact" 
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/20 bg-transparent px-5 py-2.5 text-sm font-semibold text-white transition-all hover:border-white/40 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-purple-900"
+                >
+                  <MessageSquare className="h-4 w-4" />
+                  Talk to us
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Services */}
       <section id="services" className="landing-fade mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 2xl:max-w-[1400px] 2xl:px-12">
-        <div className="text-sm font-semibold uppercase tracking-[0.2em] text-purple-600">SERVICES</div>
-        <div className="mt-3 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 sm:text-3xl">
-              Request any digital service — delivered end-to-end
-            </h2>
-            <p className="mt-3 max-w-2xl text-base text-slate-600 dark:text-slate-400 sm:text-lg">
-              Choose what you need. We assign a vetted specialist, track milestones, and manage delivery until approval.
-            </p>
-          </div>
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 sm:text-3xl">
+            Request any digital service
+          </h2>
+          <p className="mt-3 max-w-2xl mx-auto text-base text-slate-600 dark:text-slate-400 sm:text-lg">
+            Choose what you need. We assign a vetted specialist, track milestones, and manage delivery until approval.
+          </p>
         </div>
 
         <div className="landing-stagger mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -371,21 +427,37 @@ export default function HomePage() {
           })}
         </div>
 
-        <div className="mt-10 flex justify-center">
-          <Link
-            href="/idea-chatbot"
-            className="inline-flex items-center gap-2 text-sm transition-colors hover:opacity-80"
-          >
-            <span className="text-slate-500 dark:text-slate-400">Not sure what you need?</span>
-            <span className="font-semibold text-purple-700 dark:text-purple-300">Request a service</span>
-          </Link>
+        {/* CTA Card */}
+        <div className="mt-12 sm:mt-16 flex justify-center">
+          <div className="w-full max-w-5xl mx-auto">
+            <div className="rounded-2xl border border-black/5 bg-white dark:bg-white/5 dark:border-white/5 shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2)] py-8 px-6 sm:py-10 sm:px-10">
+              <div className="text-center">
+                <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 sm:text-3xl">
+                  Not sure what you need?
+                </h3>
+                <p className="mt-3 mx-auto max-w-2xl text-base text-slate-600 dark:text-slate-400 sm:text-lg">
+                  Tell us your goal — we'll clarify the scope and match you to a vetted specialist.
+                </p>
+                <div className="mt-6">
+                  <Link
+                    href="/request"
+                    className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-purple-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-purple-500/25 transition-all hover:bg-purple-500 hover:shadow-xl hover:shadow-purple-500/40 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                  >
+                    Request a service
+                  </Link>
+                  <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
+                    Takes 2 minutes • Response within 24 hours
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Samples */}
       <section id="samples" className="landing-fade landing-band landing-band--tinted mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 2xl:max-w-[1400px] 2xl:px-12">
-        <div className="text-sm font-semibold uppercase tracking-[0.2em] text-purple-600 text-center">SAMPLES</div>
-        <h2 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-slate-100 text-center sm:text-3xl">
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 text-center sm:text-3xl">
           Sample deliveries through SkillLink Nexus
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-base text-slate-600 dark:text-slate-400 sm:text-lg text-center">
@@ -446,16 +518,6 @@ export default function HomePage() {
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        <div className="mt-10 flex justify-center">
-          <Link
-            href="/idea-chatbot"
-            className="inline-flex items-center gap-2 text-sm transition-colors hover:opacity-80"
-          >
-            <span className="text-slate-500 dark:text-slate-400">Want something similar?</span>
-            <span className="font-semibold text-purple-700 dark:text-purple-300">Request a service</span>
-          </Link>
         </div>
       </section>
 

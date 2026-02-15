@@ -57,7 +57,7 @@ export default function LoginPage() {
       <div className="w-full max-w-[420px] rounded-2xl border border-slate-200 bg-white p-7 shadow-sm sm:p-8">
         <div className="flex flex-col items-center text-center">
           <Image src="/logo.png" alt="SkillLink Nexus logo" width={48} height={48} priority />
-          <h1 className="mt-4 text-xl font-semibold text-slate-900">Sign in</h1>
+          <h1 className="mt-4 text-xl font-semibold text-slate-900">Log in</h1>
           <p className="mt-1 text-sm text-slate-500">Use your email or username and password.</p>
         </div>
 
@@ -186,7 +186,7 @@ export default function LoginPage() {
           className="mt-4 h-10 w-full rounded-lg bg-purple-700 text-sm font-semibold text-white shadow-sm transition hover:bg-purple-800"
           onClick={handleLogin}
         >
-          Sign in
+          Log in
         </button>
 
         <p className="mt-3 text-center text-xs text-slate-500">
