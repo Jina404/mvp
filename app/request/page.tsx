@@ -15,7 +15,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import logo from "../../logo.png";
 import { addAccessRequest } from "@/lib/mockDb";
 
 /* ─── Constants ────────────────────────────────────────────────────────────── */
@@ -263,7 +262,7 @@ export default function RequestAccessPage() {
       <div className="w-full" style={{ maxWidth: 920 }}>
         {/* ─── Header ──────────────────────────────────────────────────── */}
         <div className="mb-5 flex flex-col items-center text-center">
-          <Image src={logo} alt="SkillLink Nexus" width={40} height={40} priority />
+          <Image src="/logo.png" alt="SkillLink Nexus" width={40} height={40} priority />
           <h1 className="mt-3 text-xl font-semibold text-slate-900 dark:text-slate-100">
             Request access to the Client Portal
           </h1>

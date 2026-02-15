@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import logo from "../../logo.png";
 
 const adminEmail = "info@skilllinknexus.com";
 const adminPassword = "Admin";
@@ -57,7 +56,7 @@ export default function LoginPage() {
     <div className="login-container">
       <div className="w-full max-w-[420px] rounded-2xl border border-slate-200 bg-white p-7 shadow-sm sm:p-8">
         <div className="flex flex-col items-center text-center">
-          <Image src={logo} alt="SkillLink Nexus logo" width={48} height={48} priority />
+          <Image src="/logo.png" alt="SkillLink Nexus logo" width={48} height={48} priority />
           <h1 className="mt-4 text-xl font-semibold text-slate-900">Sign in</h1>
           <p className="mt-1 text-sm text-slate-500">Use your email or username and password.</p>
         </div>

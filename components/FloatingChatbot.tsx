@@ -2,7 +2,6 @@
 
 import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import logo from "../logo.png";
 
 export default function FloatingChatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -187,7 +186,7 @@ export default function FloatingChatbot() {
               </button>
               <div className="flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-transparent">
-                  <Image src={logo} alt="Nexus Assistant" width={32} height={32} />
+                  <Image src="/logo.png" alt="Nexus Assistant" width={32} height={32} />
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="text-sm font-semibold text-slate-900 dark:text-slate-100">Nexus Assistant</div>
